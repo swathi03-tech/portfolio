@@ -9,7 +9,7 @@ document.querySelectorAll("nav a").forEach(a => {
 });
 
 // ✅ Change this later when backend is deployed
-const BACKEND_URL = "https://portfolio-1-yn8f.onrender.com";
+const BACKEND_URL = "https://portfolio-8feu.onrender.com";
 
 const contactForm = document.getElementById("contactForm");
 const note = document.getElementById("formNote");
