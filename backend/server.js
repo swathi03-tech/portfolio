@@ -4,7 +4,9 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://swathika-portfolio.netlify.app"
+}));
 app.use(express.json());
 
 app.get("/", (req, res) => {
