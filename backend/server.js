@@ -5,8 +5,18 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors({
-  origin: "https://swathika-portfolio.netlify.app"
+  origin:[
+
+  "https://swathika-portfolio.netlify.app",
+  "http://localhost:5500",
+    "http://127.0.0.1:5500"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
 }));
+
+// ✅ handle preflight
+app.options(/.*/, cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -38,11 +48,16 @@ app.post("/send-mail", async (req, res) => {
     });
 
     return res.json({ success: true, message: "Sent" });
-  } catch (err) {
-    console.error("Mail error:", err);
-    return res.status(500).json({ success: false, message: "Mail failed" });
-  }
+ } catch (err) {
+  console.error("Mail error:", err);
+  return res.status(500).json({
+    success: false,
+    message: err?.message || "Mail failed"
+  });
+}
 });
-
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
